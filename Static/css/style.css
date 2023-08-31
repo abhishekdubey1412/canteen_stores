@@ -1006,3 +1006,32 @@ a:focus {
   color: inherit;
 }
 /*# sourceMappingURL=style.css.map */
+
+.thanks_page {
+  height: 80vh;
+}
+
+.thanks_page .container{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+}
+
+.thanks_page h2{
+  font-size: 50px;
+  text-align: center;
+}
+
+.thanks_page .img-box{
+  text-align: center;
+  width: 100%;
+  max-width: 170px;
+  height: auto;
+}
+
+.thanks_page .img-box img{
+  width: 100%;
+  height: auto;
+}

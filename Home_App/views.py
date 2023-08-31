@@ -23,7 +23,8 @@ def book_table(request):
         if name != '' and email != '' and number != '' and date != '' and person != '':
             date = Book_Table(Name=name, Email=email, Number=number, Date=date, Person=person)
             date.save()
-
+            return render(request, 'thanks.html')
+        
     return render(request, 'book.html')
 
 def contact(request):
