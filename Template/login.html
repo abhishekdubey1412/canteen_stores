@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block main %}
+
+  <!-- Log In section -->
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Log In
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+
+              <div>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" />
+              </div>
+              <div>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+              </div>
+              <div class="registration_btn_section">
+                <div class="btn_box">
+                    <button name="sing_up" value="1">
+                        Sing In
+                    </button>
+                </div>
+                <div class="registration_btn">
+                    <a href="{% url 'registration' %}">
+                        Sing Up
+                    </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end log in section -->
+
+{% endblock main %}

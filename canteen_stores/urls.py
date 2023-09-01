@@ -26,4 +26,6 @@ urlpatterns = [
     path('book_table/', hv.book_table, name='book_table'),
     path('contact/', hv.contact, name='contact'),
     path('menu/', hv.menu, name='menu'),
+    path('registration/', hv.registration, name='registration'),
+    path('login/', hv.login, name='login')
 ]

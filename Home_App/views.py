@@ -32,3 +32,19 @@ def contact(request):
 
 def menu(request):
     return render(request, 'menu.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def registration(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        number = request.POST.get('number')
+        date = request.POST.get('date')
+        sing_up = request.POST.get('sing_up')
+    
+        if name != '' and email != '' and number != '' and date != '' and sing_up == '1':
+            return render(request, 'menu.html')
+            
+    return render(request, 'registration.html')

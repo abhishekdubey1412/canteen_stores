@@ -667,6 +667,16 @@ a:focus {
   position: relative;
 }
 
+.registration_btn_section{
+  display: flex;
+  align-items: center;
+  gap: 3%;
+}
+
+.registration_btn a {
+  color: white;
+}
+
 .book_section .heading_container {
   margin-bottom: 25px;
 }
@@ -706,7 +716,7 @@ a:focus {
   font-size: 16px;
 }
 
-.book_section .form_container button {
+.book_section .form_container button,  .registration_btn {
   margin-top: 15px;
   border: none;
   text-transform: uppercase;
