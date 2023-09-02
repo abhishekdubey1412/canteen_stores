@@ -17,16 +17,22 @@
             <form action="{% url 'registration' %}" method="POST">
               {% csrf_token %}
               <div>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" />
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" />
               </div>
               <div>
-                <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" />
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" />
               </div>
               <div>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" />
               </div>
               <div>
-                <input type="date" id="date" name="date" class="form-control">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Your Username" />
+              </div>
+              <div>
+                <input type="text" class="form-control" id="password" name="password" placeholder="Your Password" />
+              </div>
+              <div>
+                <input type="text" class="form-control" id="rpassword" name="rpassword" placeholder="Repeat Password" />
               </div>
               <div class="registration_btn_section">
                 <div class="btn_box">
