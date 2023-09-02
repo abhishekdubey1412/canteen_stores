@@ -2,8 +2,18 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from Home_App.models import Book_Table
 from django.contrib.auth.models import User, auth
+import random
 
 # Create your views here.
+
+# function for otp generation
+def otp_create():
+    otp=""
+    for i in range(4):
+        otp+=str(random.randint(1,9))
+    return otp
+
+
 def home(request):
     return render(request, 'home.html')
 
@@ -58,8 +68,9 @@ def registration(request):
 
         if password == repeat_password:
             if first_name != '' and last_name != '' and email != '' and username != 'username' and password != '' and repeat_password != '' and sing_up == '1':
+                otp = otp_create()
                 data = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
                 data.save()
-                return redirect('login')
+                return redirect('Verification')
 
     return render(request, 'registration.html')
