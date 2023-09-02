@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
 
-  <title> Canteen Stores </title>
+  <title> {{title}} </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
@@ -66,7 +66,11 @@
               </li>
             </ul>
             <div class="user_option">
-              <a href="{% url 'registration' %}" class="user_link">
+              {% if active_user %}
+                <a href="{% url 'user' %}" class="user_link"> 
+              {% else %}
+                <a href="{% url 'login' %}" class="user_link">
+              {% endif %}
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
               <a class="cart_link" href="#">

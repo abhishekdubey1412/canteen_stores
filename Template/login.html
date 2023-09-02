@@ -23,6 +23,9 @@
               <div>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
               </div>
+              {% if is_not %}
+                  <p>Incorrect ! Please, enter your username and password again</p>
+              {% endif %}
               <div class="registration_btn_section">
                 <div class="btn_box">
                     <button name="sing_up" value="1">

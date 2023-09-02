@@ -1,29 +1,39 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from Home_App.models import Book_Table
+from Home_App.models import Employees
 from django.contrib.auth.models import User, auth
-import random
 
 # Create your views here.
 
-# function for otp generation
-def otp_create():
-    otp=""
-    for i in range(4):
-        otp+=str(random.randint(1,9))
-    return otp
-
+Active_User = False
 
 def home(request):
-    return render(request, 'home.html')
+    data = {
+        'title' : 'Canteen Store',
+        'active_user' : Active_User
+    }
+    return render(request, 'home.html', data)
 
 def about(request):
-    return render(request, 'about.html')
+    data = {
+        'title' : 'About Us',
+        'active_user' : Active_User
+    }
+    return render(request, 'about.html', data)
 
 def order(request):
-    return render(request, 'order.html')
+    data = {
+        'title' : 'Order',
+        'active_user' : Active_User
+    }
+    return render(request, 'order.html', data)
 
 def book_table(request):
+    data = {
+        'title' : 'Book table',
+        'active_user' : Active_User
+    }
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -36,27 +46,46 @@ def book_table(request):
             date.save()
             return render(request, 'thanks.html')
         
-    return render(request, 'book.html')
-
-def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'book.html', data)
 
 def menu(request):
-    return render(request, 'menu.html')
+    data = {
+        'title' : 'Canteen Menu',
+        'active_user' : Active_User
+    }
+    return render(request, 'menu.html', data)
+
 
 def login(request):
+    global Active_User
+    data = {
+        'title' : 'User LogIn',
+        'is_exist' : False,
+        'active_user' : Active_User,
+    }
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = auth.authenticate(username=username, password=password)
+        user = Employees.objects.filter(Username = username, Password = password).values()
+        
+        if user.exists():
+            Active_User = True
+            return redirect('user')
+        else:
+            data['is_not'] = True
+            return render(request, 'login.html', data)
 
-        if user is not None:
-            auth.login(request,user)
-            return render(request, 'user_dashboard.html')
+    return render(request, 'login.html', data)
 
-    return render(request, 'login.html')
 
 def registration(request):
+    data = {
+        'title' : 'Registration Page',
+        'is_correct' : False,
+        'active_user' : Active_User
+    }
+    
     if request.method == "POST":
         first_name = request.POST.get('fname')
         last_name = request.POST.get('lname')
@@ -66,11 +95,20 @@ def registration(request):
         repeat_password = request.POST.get('rpassword')
         sing_up = request.POST.get('sing_up')
 
-        if password == repeat_password:
+        if password == repeat_password and not Employees.objects.filter(Password = password).values().exists() | Employees.objects.filter(Email=email).values().exists() | Employees.objects.filter(Username=username).values().exists():
             if first_name != '' and last_name != '' and email != '' and username != 'username' and password != '' and repeat_password != '' and sing_up == '1':
-                otp = otp_create()
-                data = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+                data = Employees(First_Name=first_name, Last_Name=last_name, Email=email, Username=username, Password=password)
                 data.save()
-                return redirect('Verification')
+                return redirect('login')
+        else:
+            data['is_correct'] = True
+            return render(request, 'registration.html', data)
 
-    return render(request, 'registration.html')
+    return render(request, 'registration.html', data)
+
+def user(request):
+    data = {
+        'title' : 'User Dashboard',
+        'active_user' : Active_User
+    }
+    return render(request, 'user_dashboard.html', data)

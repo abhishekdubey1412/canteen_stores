@@ -478,6 +478,10 @@ a:focus {
           transform: scale(1.1);
 }
 
+section.food_section.layout_padding-bottom {
+  margin-top: 52px;
+}
+
 .food_section .filters_menu {
   padding: 0;
   display: -webkit-box;
