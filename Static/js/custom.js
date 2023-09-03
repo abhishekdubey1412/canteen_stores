@@ -68,3 +68,30 @@ $(".client_owl-carousel").owlCarousel({
         }
     }
 });
+
+function toggleMenu(){
+    let navigation = document.querySelector('.navigation');
+    let toggle = document.querySelector('.toggle');
+    navigation.classList.toggle('active');
+    toggle.classList.toggle('active');
+}
+
+let title1 = document.getElementById('title1');
+let title2 = document.getElementById('title2');
+let title3 = document.getElementById('title3');
+let profile = document.getElementById("profile");
+let active_data = document.getElementsByClassName("active_data");
+let payment = document.getElementById('payment');
+let order = document.getElementById('order');
+
+function userDataShow( name, hide, show1, show2) {;
+    name.addEventListener('click',()=>{
+        hide.classList.remove("active_data");
+        show1.classList.add("active_data");
+        show2.classList.add("active_data");
+    })
+}
+
+userDataShow(title1, profile, payment, order);
+userDataShow(title2, payment, profile, order);
+userDataShow(title3, order, payment, profile);

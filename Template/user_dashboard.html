@@ -2,4 +2,63 @@
 {% load static %}
 
 {% block main %}
+<!-- about section -->
+
+<section class="user_section layout_padding">
+	<div class="container  ">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="heading_container">
+					<h2>
+						User Dashboard
+					</h2>
+				</div>
+			</div>
+		</div>
+		<div class="user_dashboard">
+			<div class="navigation">
+				<ul>
+					<li>
+						<a href="#" id="title1">
+							<span class="icons"><i class="fa fa-user" aria-hidden="true"></i></span>
+							<span class="title">Profile</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" id="title2">
+							<span class="icons"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+							<span class="title">Orders</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" id="title3">
+							<span class="icons"><i class="far fa-money-bill-alt"></i></span>
+							<span class="title">Payment</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<span class="icons"><i class="fas fa-sign-in-alt"></i></span>
+							<span class="title">Sing Out</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="user_data_section" style="display: flex; justify-content: center;">
+				<div id="profile" class="active_data" style="color: aliceblue;">
+					profile
+				</div>
+				<div id="payment" class="active_data" style="color: aliceblue;">
+					payment
+				</div>
+				<div id="order" class="active_data" style="color: aliceblue;">
+					order history
+				</div>
+			</div>
+			<div class="toggle" onclick="toggleMenu();"></div>
+		</div>
+	</div>
+</section>
+
+<!-- end about section -->
 {% endblock main %}

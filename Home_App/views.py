@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from Home_App.models import Book_Table
-from Home_App.models import Employees
+from Home_App.models import Book_Table, Employees
 from django.contrib.auth.models import User, auth
 
 # Create your views here.
@@ -111,4 +110,5 @@ def user(request):
         'title' : 'User Dashboard',
         'active_user' : Active_User
     }
+
     return render(request, 'user_dashboard.html', data)

@@ -14,3 +14,11 @@ class Employees(models.Model):
     Email = models.EmailField(max_length=55)
     Username = models.CharField(max_length=55)
     Password = models.CharField(max_length=55)
+    Coins = models.IntegerField(default=0)
+
+class Items(models.Model):
+    Title = models.CharField(max_length=55)
+    Decription = models.TextField(max_length=250)
+    Price = models.IntegerField()
+    Quantity = models.IntegerField(default=0)
+    Image = models.FileField(upload_to='items_image/', max_length=250, null=True, default=None)

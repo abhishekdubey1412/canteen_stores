@@ -58,6 +58,24 @@ padding-left: 0;
     margin-right: 15px;
     margin-bottom: 0;
   }
+
+  section.user_section.layout_padding {
+    padding: 20px 0 0 0;
+  }
+
+  .navigation{
+		left: -60px;
+    width: 0;
+	}
+
+	.navigation.active{
+		left: 0;
+		width: 100%;
+	}
+
+	.toggle.active{
+		background: #3e0748;
+	}
 }
 
 @media (max-width: 576px) {}
