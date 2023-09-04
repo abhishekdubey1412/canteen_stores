@@ -29,7 +29,8 @@ urlpatterns = [
     path('menu/', hv.menu, name='menu'),
     path('registration/', hv.registration, name='registration'),
     path('login/', hv.login, name='login'),
-    path('user/', hv.user, name='user')
+    path('user/', hv.user, name='user'),
+    path('card/', hv.card, name='card'),
 ]
 
 if settings.DEBUG:

@@ -101,5 +101,5 @@
 }
 
 .active_data {
-	visibility: hidden;
+	display: none;
 }

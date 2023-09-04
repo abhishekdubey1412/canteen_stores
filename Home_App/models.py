@@ -18,7 +18,13 @@ class Employees(models.Model):
 
 class Items(models.Model):
     Title = models.CharField(max_length=55)
+    Type = models.CharField(max_length=10, default='')
     Decription = models.TextField(max_length=250)
     Price = models.IntegerField()
     Quantity = models.IntegerField(default=0)
     Image = models.FileField(upload_to='items_image/', max_length=250, null=True, default=None)
+
+    def save(self, *args, **kwargs):
+        # Convert the 'type' field to lowercase before saving
+        self.Type = self.Type.lower()
+        super(Items, self).save(*args, **kwargs)

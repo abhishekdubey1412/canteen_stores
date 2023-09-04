@@ -34,7 +34,7 @@
             <div>
               <input type="text" class="form-control" id="rpassword" name="rpassword" placeholder="Repeat Password" />
             </div>
-            {% if is_correct %}
+            {% if data.active_user %}
             <p>Password is not matched !</p>
             {% endif %}
             <div class="registration_btn_section">

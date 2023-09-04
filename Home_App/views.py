@@ -1,32 +1,48 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from Home_App.models import Book_Table, Employees
+from Home_App.models import Book_Table, Employees, Items
 from django.contrib.auth.models import User, auth
+import random
+import datetime
 
 # Create your views here.
 
 Active_User = False
+query_data = Items.objects.all()
+ItemsOfDay_1 = random.choice(query_data)
+ItemsOfDay_2 = random.choice(query_data)
+
+# Get the current date
+current_date = datetime.datetime.now()
+
+# Get the day of the week as an integer (0 = Monday, 1 = Tuesday, ..., 6 = Sunday)
+day_of_week = current_date.weekday()
+
+# Define a list of day names
+day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+name_of_day = day_names[day_of_week]
 
 def home(request):
     data = {
         'title' : 'Canteen Store',
         'active_user' : Active_User
     }
-    return render(request, 'home.html', data)
+
+    return render(request, 'home.html', {'data': data, 'query_data': query_data, 'ItemsOfDay_1': ItemsOfDay_1, 'ItemsOfDay_2': ItemsOfDay_2, 'name_of_day': name_of_day })
 
 def about(request):
     data = {
         'title' : 'About Us',
         'active_user' : Active_User
     }
-    return render(request, 'about.html', data)
+    return render(request, 'about.html', {'data': data})
 
 def order(request):
     data = {
         'title' : 'Order',
         'active_user' : Active_User
     }
-    return render(request, 'order.html', data)
+    return render(request, 'order.html', {'data': data})
 
 def book_table(request):
     data = {
@@ -45,14 +61,16 @@ def book_table(request):
             date.save()
             return render(request, 'thanks.html')
         
-    return render(request, 'book.html', data)
+    return render(request, 'book.html', {'data': data})
 
 def menu(request):
     data = {
         'title' : 'Canteen Menu',
         'active_user' : Active_User
     }
-    return render(request, 'menu.html', data)
+    query_data = Items.objects.all()
+    
+    return render(request, 'menu.html', {'data': data, 'query_data': query_data})
 
 
 def login(request):
@@ -73,9 +91,9 @@ def login(request):
             return redirect('user')
         else:
             data['is_not'] = True
-            return render(request, 'login.html', data)
+            return render(request, 'login.html', {'data': data})
 
-    return render(request, 'login.html', data)
+    return render(request, 'login.html', {'data': data})
 
 
 def registration(request):
@@ -101,9 +119,9 @@ def registration(request):
                 return redirect('login')
         else:
             data['is_correct'] = True
-            return render(request, 'registration.html', data)
+            return render(request, 'registration.html', {'data': data})
 
-    return render(request, 'registration.html', data)
+    return render(request, 'registration.html', {'data': data})
 
 def user(request):
     data = {
@@ -111,4 +129,12 @@ def user(request):
         'active_user' : Active_User
     }
 
-    return render(request, 'user_dashboard.html', data)
+    return render(request, 'user_dashboard.html', {'data': data})
+
+def card(request):
+    data = {
+        'title' : 'Shopping Card',
+        'active_user' : Active_User
+    }
+
+    return render(request, 'shopping_cart.html', {'data': data})

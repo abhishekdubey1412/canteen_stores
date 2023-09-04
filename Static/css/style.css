@@ -417,6 +417,9 @@ a:focus {
 }
 
 .offer_section .box .img-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 175px;
   min-width: 175px;
   height: 175px;
@@ -430,7 +433,7 @@ a:focus {
 }
 
 .offer_section .box .img-box img {
-  width: 100%;
+  width: 84%;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
