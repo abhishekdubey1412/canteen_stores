@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Home_App.models import Book_Table, Employees, Items
+from Home_App.models import Book_Table, Employees, Items, CardItems, ItemsOrder
 
 # Register your models here.
 
@@ -57,3 +57,5 @@ class ItemsAdmin(admin.ModelAdmin):
 admin.site.register(Book_Table, Book_TableAdmin)
 admin.site.register(Employees, EmployeesAdmin)
 admin.site.register(Items, ItemsAdmin)
+admin.site.register(CardItems)
+admin.site.register(ItemsOrder)

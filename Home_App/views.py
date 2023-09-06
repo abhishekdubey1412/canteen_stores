@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from Home_App.models import Book_Table, Employees, Items
+from Home_App.models import Book_Table, Employees, Items, CardItems
 from django.contrib.auth.models import User, auth
 import random
 import datetime
@@ -11,6 +11,9 @@ Active_User = False
 query_data = Items.objects.all()
 ItemsOfDay_1 = random.choice(query_data)
 ItemsOfDay_2 = random.choice(query_data)
+
+if ItemsOfDay_1 == ItemsOfDay_2:
+    ItemsOfDay_2 = random.choice(query_data)
 
 # Get the current date
 current_date = datetime.datetime.now()
@@ -63,13 +66,37 @@ def book_table(request):
         
     return render(request, 'book.html', {'data': data})
 
+order_item = False
+
+def add_data(order_item):
+    if order_item:
+        user_id = order_item
+        item_image  = Items.objects.get(id=order_item).Image
+        item_name = Items.objects.get(id=order_item).Title
+        item_type = Items.objects.get(id=order_item).Type
+        item_price = Items.objects.get(id=order_item).Price
+        card_data = CardItems(Image=item_image, Name=item_name, Type=item_type, Price=item_price, UserId=user_id)
+        card_data.save()
+
 def menu(request):
+    global order_item
     data = {
         'title' : 'Canteen Menu',
         'active_user' : Active_User
     }
+
     query_data = Items.objects.all()
+
+    if request.method == "POST":
+        active = request.POST.get('show_svg')
+
+        if active == "not_active":
+            return redirect('login')
+        elif active:
+            order_item = active
     
+        add_data(order_item)
+        
     return render(request, 'menu.html', {'data': data, 'query_data': query_data})
 
 
@@ -124,17 +151,27 @@ def registration(request):
     return render(request, 'registration.html', {'data': data})
 
 def user(request):
+    global Active_User
     data = {
         'title' : 'User Dashboard',
         'active_user' : Active_User
     }
+
+    if request.method == "POST":
+        sing_out = request.POST.get('sing_out')
+
+        if sing_out == '1':
+            Active_User = False
+            return redirect('login')
 
     return render(request, 'user_dashboard.html', {'data': data})
 
 def card(request):
     data = {
         'title' : 'Shopping Card',
-        'active_user' : Active_User
+        'active_user' : Active_User,
     }
+    
+    DataOfCard = CardItems.objects.all()
 
-    return render(request, 'shopping_cart.html', {'data': data})
+    return render(request, 'shopping_cart.html', {'data': data, 'DataOfCard': DataOfCard})

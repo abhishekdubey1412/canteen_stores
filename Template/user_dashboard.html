@@ -37,10 +37,13 @@
 						</a>
 					</li>
 					<li>
-						<a href="">
-							<span class="icons"><i class="fas fa-sign-in-alt"></i></span>
-							<span class="title">Sing Out</span>
-						</a>
+						<form action="{% url 'user' %}" method="POST">
+							{% csrf_token %}
+							<button name="sing_out" value='1'>
+								<span class="icons"><i class="fas fa-sign-in-alt"></i></span>
+								<span class="title">Sing Out</span>
+							</button>
+						</form>
 					</li>
 				</ul>
 			</div>

@@ -28,3 +28,18 @@ class Items(models.Model):
         # Convert the 'type' field to lowercase before saving
         self.Type = self.Type.lower()
         super(Items, self).save(*args, **kwargs)
+
+class CardItems(models.Model):
+    Image = models.CharField(max_length=100)
+    Name = models.CharField(max_length=55)
+    Type = models.CharField(max_length=10)
+    Price = models.IntegerField()
+    UserId = models.IntegerField()
+
+class ItemsOrder(models.Model):
+    Image = models.CharField(max_length=100)
+    Name = models.CharField(max_length=55)
+    Type = models.CharField(max_length=10)
+    Price = models.IntegerField()
+    UserId = models.IntegerField()
+    Quantity = models.IntegerField()

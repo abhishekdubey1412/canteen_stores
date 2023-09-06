@@ -38,7 +38,11 @@
 	background: #ea1d63;
 }
 
-.navigation ul li a{
+button.btn.btn-outline-warning.btn-sm.ml-2 {
+	width: fit-content;
+}
+
+.navigation ul li a, button{
 	position: relative;
 	display: block;
 	width: 100%;
@@ -47,7 +51,7 @@
 	color: white;
 }
 
-.navigation ul li a .icons{
+.navigation ul li a .icons, button .icons{
 	position: relative;
 	display: block;
 	min-width: 60px;
@@ -60,7 +64,12 @@
 	font-size: 24px;
 }
 
-.navigation ul li a .title{
+.navigation ul li button {
+	background: transparent;
+	border: none;
+}
+
+.navigation ul li a .title, button .title{
 	position: relative;
 	display: block;
 	padding: 0 10px;
