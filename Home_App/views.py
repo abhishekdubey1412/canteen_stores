@@ -75,8 +75,14 @@ def add_data(order_item):
         item_name = Items.objects.get(id=order_item).Title
         item_type = Items.objects.get(id=order_item).Type
         item_price = Items.objects.get(id=order_item).Price
-        card_data = CardItems(Image=item_image, Name=item_name, Type=item_type, Price=item_price, UserId=user_id)
-        card_data.save()
+
+        if CardItems.objects.filter(UserId = user_id, Username = UserName).values().exists():
+            my_object = CardItems.objects.get(UserId = user_id, Username = UserName)
+            my_object.Price = my_object.Price + item_price
+            my_object.save()
+        else:
+            card_data = CardItems(Image=item_image, Name=item_name, Type=item_type, Price=item_price, UserId=user_id, Username = UserName)
+            card_data.save()
 
 def menu(request):
     global order_item
@@ -94,14 +100,16 @@ def menu(request):
             return redirect('login')
         elif active:
             order_item = active
-    
-        add_data(order_item)
         
+        if order_item:
+            add_data(order_item)
+            return redirect('card')
+
     return render(request, 'menu.html', {'data': data, 'query_data': query_data})
 
 
 def login(request):
-    global Active_User
+    global Active_User, UserName
     data = {
         'title' : 'User LogIn',
         'is_exist' : False,
@@ -114,6 +122,7 @@ def login(request):
         user = Employees.objects.filter(Username = username, Password = password).values()
         
         if user.exists():
+            UserName = username
             Active_User = True
             return redirect('user')
         else:
@@ -172,6 +181,6 @@ def card(request):
         'active_user' : Active_User,
     }
     
-    DataOfCard = CardItems.objects.all()
+    DataOfCard = CardItems.objects.filter(Username = UserName)
 
     return render(request, 'shopping_cart.html', {'data': data, 'DataOfCard': DataOfCard})

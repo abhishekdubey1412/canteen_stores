@@ -30,6 +30,7 @@ class Items(models.Model):
         super(Items, self).save(*args, **kwargs)
 
 class CardItems(models.Model):
+    Username = models.CharField(max_length=50, default="")
     Image = models.CharField(max_length=100)
     Name = models.CharField(max_length=55)
     Type = models.CharField(max_length=10)
