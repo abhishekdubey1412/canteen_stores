@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 
-*{
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Poppins' sans-serif;
 }
 
-.navigation{
+.navigation {
 	position: absolute;
 	width: 60px;
 	height: 100%;
@@ -17,7 +17,7 @@
 }
 
 .navigation:hover,
-.navigation.active{
+.navigation.active {
 	width: 300px;
 }
 
@@ -34,7 +34,7 @@
 	list-style: none;
 }
 
-.navigation ul li:hover{
+.navigation ul li:hover {
 	background: #ea1d63;
 }
 
@@ -42,7 +42,8 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	width: fit-content;
 }
 
-.navigation ul li a, button{
+.navigation ul li a,
+button {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -51,7 +52,8 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	color: white;
 }
 
-.navigation ul li a .icons, button .icons{
+.navigation ul li a .icons,
+button .icons {
 	position: relative;
 	display: block;
 	min-width: 60px;
@@ -60,7 +62,8 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	text-align: center;
 }
 
-.navigation ul li a .icons .fa, .fas{
+.navigation ul li a .icons .fa,
+.fas {
 	font-size: 24px;
 }
 
@@ -69,7 +72,8 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	border: none;
 }
 
-.navigation ul li a .title, button .title{
+.navigation ul li a .title,
+button .title {
 	position: relative;
 	display: block;
 	padding: 0 10px;
@@ -79,7 +83,7 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	white-space: nowrap;
 }
 
-.toggle{
+.toggle {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -89,11 +93,11 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	cursor: pointer;
 }
 
-.toggle.active{
+.toggle.active {
 	background: #ea1d63;
 }
 
-.toggle::before{
+.toggle::before {
 	content: '\2630';
 	font-family: 'Font Awesome 5 Free';
 	position: absolute;
@@ -105,10 +109,50 @@ button.btn.btn-outline-warning.btn-sm.ml-2 {
 	color: white;
 }
 
-.toggle.active::before{
+.toggle.active::before {
 	content: '\2613';
 }
 
 .active_data {
 	display: none;
+}
+
+.user_dashboard {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	min-height: 100vh;
+	background: #150019;
+}
+
+.user_data_section.container {
+	position: relative;
+	top: 100px;
+}
+
+.user_data_section.container .text-center img {
+	width: 100%;
+}
+
+.user_profile_data {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: -webkit-fill-available;
+}
+
+.user_name {
+	width: -webkit-fill-available;
+}
+
+.edit_section #edit_button {
+	padding: 6px 31px;
+	border: none;
+	color: black;
+}
+
+.user_data_section.container hr {
+	border: 1px solid white;
+	width: 98%;
+	float: right;
 }

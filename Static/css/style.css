@@ -1043,12 +1043,6 @@ section.user_section .row {
   margin-bottom: 30px;
 }
 
-.user_dashboard {
-  position: relative;
-  min-height: 100vh;
-  background: #150019;
-}
-
 .footer_section .footer_social a:hover {
   color: #ffbe33;
 }

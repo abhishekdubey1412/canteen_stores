@@ -39,7 +39,7 @@
 					<li>
 						<form action="{% url 'user' %}" method="POST">
 							{% csrf_token %}
-							<button name="sing_out" value='1'>
+							<button name="sing_out" class="sing_out" value='1'>
 								<span class="icons"><i class="fas fa-sign-in-alt"></i></span>
 								<span class="title">Sing Out</span>
 							</button>
@@ -47,9 +47,21 @@
 					</li>
 				</ul>
 			</div>
-			<div class="user_data_section" style="display: flex; justify-content: center;">
-				<div id="profile" class="active_data" style="color: aliceblue;">
-					profile
+			<div class="user_data_section container col-sm-6">
+				<div id="profile" style="color: aliceblue; ">
+					<div class="user_profile_data">
+						<div class="text-center col-sm-3">
+							<img src="{% static 'images/User-Profile.png' %}" class="rounded" alt="User Profile">
+						</div>
+						<div class="user_name">
+							<h2 class="user_name">Abhishek Dubey</h2>
+							<span class="user_email">abhishekdubey1412@gmail.com</span>
+						</div>
+						<div class="edit_section">
+							<button id="edit_button">Edit</button>
+						</div>
+					</div>
+					<hr>
 				</div>
 				<div id="payment" class="active_data" style="color: aliceblue;">
 					payment
