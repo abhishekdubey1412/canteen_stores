@@ -43,9 +43,9 @@
                   <form action="{% url 'menu' %}" method="POST">
                     {% csrf_token %}
                     {% if data.active_user %}
-                    <button name="show_svg" value="{{ item.id }}">
+                    <button name="show_svg" id="show_svg" value="{{ item.id }}">
                       {% else %}
-                      <button name="show_svg" value="not_active">
+                      <button name="show_svg" id="show_svg" value="not_active">
                         {% endif %}
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029"

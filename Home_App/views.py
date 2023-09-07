@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from Home_App.models import Book_Table, Employees, Items, CardItems
+from Home_App.models import Book_Table, Employees, Items, CardItems, ItemsOrder
 from django.contrib.auth.models import User, auth
 import random
 import datetime
@@ -79,6 +79,7 @@ def add_data(order_item):
         if CardItems.objects.filter(UserId = user_id, Username = UserName).values().exists():
             my_object = CardItems.objects.get(UserId = user_id, Username = UserName)
             my_object.Price = my_object.Price + item_price
+            my_object.Quantity += 1
             my_object.save()
         else:
             card_data = CardItems(Image=item_image, Name=item_name, Type=item_type, Price=item_price, UserId=user_id, Username = UserName)
@@ -148,13 +149,21 @@ def registration(request):
         repeat_password = request.POST.get('rpassword')
         sing_up = request.POST.get('sing_up')
 
-        if password == repeat_password and not Employees.objects.filter(Password = password).values().exists() | Employees.objects.filter(Email=email).values().exists() | Employees.objects.filter(Username=username).values().exists():
+        if Employees.objects.filter(Password = password).values().exists():
+            data['is_correct'] = "This password is already used."
+        elif Employees.objects.filter(Email=email).values().exists():
+            data['is_correct'] = "The Email_Id has already been used."
+        elif Employees.objects.filter(Username=username).values().exists():
+            data['is_correct'] = "The username has already been taken."
+        elif password == repeat_password:
             if first_name != '' and last_name != '' and email != '' and username != 'username' and password != '' and repeat_password != '' and sing_up == '1':
                 data = Employees(First_Name=first_name, Last_Name=last_name, Email=email, Username=username, Password=password)
                 data.save()
                 return redirect('login')
+            else:
+                data['is_correct'] = "please fill out this fields"
         else:
-            data['is_correct'] = True
+            data['is_correct'] = "Password is not matched !"
             return render(request, 'registration.html', {'data': data})
 
     return render(request, 'registration.html', {'data': data})
@@ -172,15 +181,77 @@ def user(request):
         if sing_out == '1':
             Active_User = False
             return redirect('login')
+    
+    employees = Employees.objects.get(Username = UserName)
 
-    return render(request, 'user_dashboard.html', {'data': data})
+    return render(request, 'user_dashboard.html', {'data': data, 'employees':employees})
+
 
 def card(request):
     data = {
         'title' : 'Shopping Card',
         'active_user' : Active_User,
     }
-    
+
+    if request.method == "POST":
+        pay_button = request.POST.get('pay_button')
+        delete_item = request.POST.get('delete_item')
+        add_item = request.POST.get('add_item')
+        less_item = request.POST.get('less_item')
+
+        if delete_item:
+            data_to_delete = CardItems.objects.filter(id = delete_item, Username = UserName)
+            data_to_delete.delete()
+            return redirect('card')
+        
+        if add_item:
+            data_to_add = CardItems.objects.get(id = add_item, Username = UserName)
+            data_to_add.Price = data_to_add.Price + Items.objects.get(id = data_to_add.UserId).Price
+            data_to_add.Quantity += 1
+            data_to_add.save()
+        
+        if less_item:
+            data_to_less = CardItems.objects.get(id = less_item, Username = UserName)
+            data_to_less.Price = data_to_less.Price - Items.objects.get(id = data_to_less.UserId).Price
+            data_to_less.Quantity -= 1
+            if data_to_less.Quantity > 0:
+                data_to_less.save()
+
+        if pay_button == "1":
+            cart_items = CardItems.objects.filter(Username=UserName)
+            total_price = sum(item.Price for item in cart_items)
+
+            # Get the user's available coins
+            user_coins = Employees.objects.get(Username=UserName).Coins
+
+            if total_price <= user_coins:
+                # The total price is within the user's available coins
+                for cart_item in cart_items:
+                    # Create an order item for each item in the cart
+                    item_order = ItemsOrder(
+                        Image=cart_item.Image,
+                        Name=cart_item.Name,
+                        Type=cart_item.Type,
+                        Price=cart_item.Price,
+                        Username=UserName,
+                        Quantity=cart_item.Quantity
+                    )
+                    item_order.save()  # Save the order item to the database
+
+                # Deduct the total price from the user's available coins
+                Employees.objects.filter(Username=UserName).update(Coins=user_coins - total_price)
+
+                # Clear the user's cart by deleting the cart items
+                cart_items.delete()
+
+                # Optionally, you can redirect to an order confirmation page
+                return render(request, 'invoice.html')
+            else:
+                # Handle the case where the user doesn't have enough coins
+                # You can show an error message or take appropriate action
+                # For now, we'll print a message
+                data['Insufficient_coins'] = "Insufficient coins to complete the purchase"
+
     DataOfCard = CardItems.objects.filter(Username = UserName)
 
     return render(request, 'shopping_cart.html', {'data': data, 'DataOfCard': DataOfCard})

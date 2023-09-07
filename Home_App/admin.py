@@ -55,7 +55,7 @@ class ItemsAdmin(admin.ModelAdmin):
         return obj.Quantity  # Replace 'quantity' with the actual field name in your Items model
 
 class CardItemsAdmin(admin.ModelAdmin):
-    list_display = ('Username', 'item_title', 'item_price')
+    list_display = ('Username', 'item_title', 'item_price', 'total_Items')
 
     def Username(self, obj):
         return obj.Username  # Replace 'Username' with the actual field name in your Items model
@@ -65,9 +65,27 @@ class CardItemsAdmin(admin.ModelAdmin):
 
     def item_price(self, obj):
         return obj.Price  # Replace 'price' with the actual field name in your Items model
+    
+    def total_Items(self, obj):
+        return obj.Quantity  # Replace 'Quantity' with the actual field name in your Items model
+
+class ItemsOrderAdmin(admin.ModelAdmin):
+    list_display = ('Username', 'item_title', 'item_price', 'total_Items')
+
+    def Username(self, obj):
+        return obj.Username  # Replace 'Username' with the actual field name in your Items model
+    
+    def item_title(self, obj):
+        return obj.Name  # Replace 'Name' with the actual field name in your Items model
+
+    def item_price(self, obj):
+        return obj.Price  # Replace 'price' with the actual field name in your Items model
+    
+    def total_Items(self, obj):
+        return obj.Quantity  # Replace 'Quantity' with the actual field name in your Items model
 
 admin.site.register(Book_Table, Book_TableAdmin)
 admin.site.register(Employees, EmployeesAdmin)
 admin.site.register(Items, ItemsAdmin)
 admin.site.register(CardItems, CardItemsAdmin)
-admin.site.register(ItemsOrder)
+admin.site.register(ItemsOrder, ItemsOrderAdmin)

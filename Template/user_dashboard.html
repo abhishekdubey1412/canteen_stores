@@ -41,7 +41,7 @@
 							{% csrf_token %}
 							<button name="sing_out" class="sing_out" value='1'>
 								<span class="icons"><i class="fas fa-sign-in-alt"></i></span>
-								<span class="title">Sing Out</span>
+								<span class="title">Sign Out</span>
 							</button>
 						</form>
 					</li>
@@ -54,8 +54,8 @@
 							<img src="{% static 'images/User-Profile.png' %}" class="rounded" alt="User Profile">
 						</div>
 						<div class="user_name">
-							<h2 class="user_name">Abhishek Dubey</h2>
-							<span class="user_email">abhishekdubey1412@gmail.com</span>
+							<h2 class="user_name">{{ employees.First_Name }} {{ employees.Last_Name }}</h2>
+							<span class="user_email">{{ employees.Email }}</span>
 						</div>
 						<div class="edit_section">
 							<button id="edit_button">Edit</button>

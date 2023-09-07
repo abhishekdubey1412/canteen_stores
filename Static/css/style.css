@@ -258,10 +258,6 @@ a:focus {
   bottom: 8px;
 }
 
-.addCounter {
-  visibility: hidden;
-}
-
 .user_option .order_online {
   display: inline-block;
   padding: 8px 30px;

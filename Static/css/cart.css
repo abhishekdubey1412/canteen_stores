@@ -47,6 +47,11 @@ section.shopping_section.layout_padding h4{
     font-weight: bold;
 }
 
-#delete_item {
-  cursor: pointer;
+#delete_item, #add_item, #less_item {
+  border: none;
+  background-color: transparent;
+}
+
+#delete_item:focus, #show_svg:focus, #add_item:focus, #less_item:focus, .sing_out:focus {      
+  outline: none; 
 }

@@ -38,12 +38,12 @@
 	background: #ea1d63;
 }
 
-button.btn.btn-outline-warning.btn-sm.ml-2 {
+.sing_out.btn.btn-outline-warning.btn-sm.ml-2 {
 	width: fit-content;
 }
 
 .navigation ul li a,
-button {
+.sing_out {
 	position: relative;
 	display: block;
 	width: 100%;
@@ -53,7 +53,7 @@ button {
 }
 
 .navigation ul li a .icons,
-button .icons {
+.sing_out .icons {
 	position: relative;
 	display: block;
 	min-width: 60px;
@@ -67,13 +67,13 @@ button .icons {
 	font-size: 24px;
 }
 
-.navigation ul li button {
+.navigation ul li .sing_out {
 	background: transparent;
 	border: none;
 }
 
 .navigation ul li a .title,
-button .title {
+.sing_out .title {
 	position: relative;
 	display: block;
 	padding: 0 10px;
