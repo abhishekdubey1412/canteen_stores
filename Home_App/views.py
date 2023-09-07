@@ -220,6 +220,7 @@ def card(request):
         if pay_button == "1":
             cart_items = CardItems.objects.filter(Username=UserName)
             total_price = sum(item.Price for item in cart_items)
+            data['total_price'] = total_price
 
             # Get the user's available coins
             user_coins = Employees.objects.get(Username=UserName).Coins
@@ -241,16 +242,30 @@ def card(request):
                 # Deduct the total price from the user's available coins
                 Employees.objects.filter(Username=UserName).update(Coins=user_coins - total_price)
 
+                item_order = ItemsOrder.objects.filter(Username=UserName)
+                buyer_name = Employees.objects.get(Username=UserName)
+                data['formatted_date'] = current_date.strftime("%B %d, %Y")
+                
+                # Render the invoice.html template and pass data, cart items, and buyer name
+                invoice_data = {'data': data, 'cart_items': cart_items, 'buyer_name': buyer_name}
+                invoice_template = 'invoice.html'
+                
+                # Optionally, you can redirect to an order confirmation page instead of rendering the template
+                # return render(request, 'order_confirmation.html', {'invoice_data': invoice_data})
+                
+                # Render the invoice.html template
+                response = render(request, invoice_template, invoice_data)
+                
                 # Clear the user's cart by deleting the cart items
                 cart_items.delete()
-
-                # Optionally, you can redirect to an order confirmation page
-                return render(request, 'invoice.html')
+                
+                return response
             else:
                 # Handle the case where the user doesn't have enough coins
                 # You can show an error message or take appropriate action
                 # For now, we'll print a message
                 data['Insufficient_coins'] = "Insufficient coins to complete the purchase"
+
 
     DataOfCard = CardItems.objects.filter(Username = UserName)
 
