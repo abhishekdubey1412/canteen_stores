@@ -76,13 +76,6 @@
               </li>
             </ul>
             <div class="user_option">
-              {% if data.active_user %}
-              <a href="{% url 'user' %}" class="user_link">
-                {% else %}
-                <a href="{% url 'login' %}" class="user_link">
-                  {% endif %}
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                </a>
                 {% if data.active_user %}
                 <a class="cart_link" href="{% url 'card' %}">
                   {% else %}
@@ -143,14 +136,13 @@
                       </g>
                     </svg>
                   </a>
-                  <form class="form-inline">
-                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                  </form>
-                  <a href="" class="order_online">
-                    Order Online
-                  </a>
+              {% if data.active_user %}
+              <a href="{% url 'user' %}" class="user_link">
+                {% else %}
+                <a href="{% url 'login' %}" class="user_link">
+                  {% endif %}
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
             </div>
           </div>
         </nav>
@@ -193,7 +185,7 @@
           <div class="col-md-4 footer-col">
             <div class="footer_detail">
               <a href="" class="footer-logo">
-                Feane
+                Canteen Stores
               </a>
               <p>
                 Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin
@@ -230,7 +222,7 @@
             </p>
           </div>
         </div>
-        <div class="footer-info">
+        <div class="footer-info" style="display:none">
           <p>
             &copy; <span id="displayYear"></span> All Rights Reserved By
             <a href="https://github.com/abhishekdubey1412/" target="_blank">Abhishek Dubey</a><br><br>

@@ -183,8 +183,9 @@ def user(request):
             return redirect('login')
     
     employees = Employees.objects.get(Username = UserName)
+    DataOfCard = ItemsOrder.objects.filter(Username=UserName)
 
-    return render(request, 'user_dashboard.html', {'data': data, 'employees':employees})
+    return render(request, 'user_dashboard.html', {'data': data, 'employees':employees, 'DataOfCard': DataOfCard})
 
 
 def card(request):

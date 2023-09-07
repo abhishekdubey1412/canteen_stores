@@ -62,12 +62,56 @@
 						</div>
 					</div>
 					<hr>
-				</div>
-				<div id="payment" class="active_data" style="color: aliceblue;">
-					payment
+					<div class="coins_section container">
+						<div id="coins"> 
+							<h5> Coins <h5>
+						</div>
+						<span>{{employees.Coins}}</span>
+					</div>
+					<div class="registration_btn">
+                		<a href="{% url 'menu' %}">
+                  			Utilize
+                		</a>
+              		</div>
 				</div>
 				<div id="order" class="active_data" style="color: aliceblue;">
-					order history
+					<div class="coins_section container">
+						<div id="coins"> 
+							<h5> Coins <h5>
+						</div>
+						<span>{{employees.Coins}}</span>
+					</div>
+					<div class="registration_btn">
+                		<a href="{% url 'menu' %}">
+                  			Add Coins
+                		</a>
+              		</div>
+				</div>
+				<div id="payment" class="active_data" style="color: aliceblue;">
+					<div class="order_title">
+						<h2>Order History</h2>
+					</div>
+					<div class="order_items">
+						{% for Order in DataOfCard %}
+						<div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
+							<div class="mr-1"><img class="rounded" src="/media/{{ Order.Image }}" width="70"></div>
+							<div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">{{ Order.Name }}</span>
+								<div class="d-flex flex-row product-desc">
+									<div class="size mr-1"><span class="text-grey">Size:</span><span
+											class="font-weight-bold">&nbsp;M</span></div>
+									<div class="color"><span class="text-grey">Type:</span><span
+											class="font-weight-bold">&nbsp;{{ Order.Type }}</span></div>
+								</div>
+							</div>
+								<div class="d-flex flex-row align-items-center qty">
+									<h5 class="text-grey mt-1 mr-1 ml-1">{{ Order.Quantity }}</h5>
+								</div>
+							<div>
+								<h5 class="text-grey">₹{{ Order.Price }}</h5>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
 				</div>
 			</div>
 			<div class="toggle" onclick="toggleMenu();"></div>
